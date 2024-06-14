@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\Is_Admin;
@@ -30,7 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/clients', [ProductController::class, 'index'])->middleware([Is_Admin::class])->name('products.index');
+    Route::get('/clients', [ClientController::class, 'index'])->middleware([Is_Admin::class])->name('clients.index');
     Route::get("/clients/create", [ProductController::class, 'create'])->middleware([Is_Admin::class])->name('products.create');
     Route::post("/clients", [ProductController::class, 'store'])->middleware([Is_Admin::class])->name('product.store');
     Route::get("/clients/{product}/edit", [ProductController::class, 'edit'])->middleware([Is_Admin::class])->name('product.edit');

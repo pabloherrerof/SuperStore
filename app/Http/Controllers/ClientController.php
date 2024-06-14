@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\Is_Admin;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ClientController extends Controller
 {
@@ -13,7 +14,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return Client::all();
+        $clients = Client::with('user')->get();
+
+        return Inertia::render('Clients', [
+            'clients' => $clients,
+        ]);
     }
 
     /**
