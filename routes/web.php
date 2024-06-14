@@ -29,6 +29,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete("/products/{product}", [ProductController::class, 'destroy'])->middleware([Is_Admin::class])->name('product.destroy');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/clients', [ProductController::class, 'index'])->middleware([Is_Admin::class])->name('products.index');
+    Route::get("/clients/create", [ProductController::class, 'create'])->middleware([Is_Admin::class])->name('products.create');
+    Route::post("/clients", [ProductController::class, 'store'])->middleware([Is_Admin::class])->name('product.store');
+    Route::get("/clients/{product}/edit", [ProductController::class, 'edit'])->middleware([Is_Admin::class])->name('product.edit');
+    Route::patch("/clients/{product}", [ProductController::class, 'update'])->middleware([Is_Admin::class])->name('product.update');
+    Route::delete("/clients/{product}", [ProductController::class, 'destroy'])->middleware([Is_Admin::class])->name('product.destroy');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
