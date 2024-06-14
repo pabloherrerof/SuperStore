@@ -1,27 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Http\Middleware\Is_Admin;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ClientController extends Controller
+class ApiClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Client::all();
-    }
+        $clients = Client::with('user')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        if(auth()->user()->role !== 'admin') {
+            return response()->json(['message' => 'You are not authorized to access this route'], 401);
+        }
+        return response()->json($clients);
     }
 
     /**
@@ -36,14 +33,6 @@ class ClientController extends Controller
      * Display the specified resource.
      */
     public function show(Client $client)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Client $client)
     {
         //
     }

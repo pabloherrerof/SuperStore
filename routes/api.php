@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\ApiClientController;
 use App\Http\Controllers\API\ApiProductController;
+use App\Http\Middleware\Is_Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -28,8 +30,9 @@ Route::post('/login', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/products', [ApiProductController::class, 'index']);
 });
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/clients', [ApiClientController::class, 'index']);
 });
 
 Route::fallback(function(){

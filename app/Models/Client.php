@@ -13,7 +13,6 @@ class Client extends Model
         'phone',
         'address',
         'image',
-        'user_id'
     ];
 
     public function categories()

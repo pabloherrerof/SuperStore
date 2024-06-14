@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\Is_Admin;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,11 +22,11 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get("/products/create", [ProductController::class, 'create'])->name('products.create');
-    Route::post("/products", [ProductController::class, 'store'])->name('product.store');
-    Route::get("/products/{product}/edit", [ProductController::class, 'edit'])->name('product.edit');
-    Route::patch("/products/{product}", [ProductController::class, 'update'])->name('product.update');
-    Route::delete("/products/{product}", [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::get("/products/create", [ProductController::class, 'create'])->middleware([Is_Admin::class])->name('products.create');
+    Route::post("/products", [ProductController::class, 'store'])->middleware([Is_Admin::class])->name('product.store');
+    Route::get("/products/{product}/edit", [ProductController::class, 'edit'])->middleware([Is_Admin::class])->name('product.edit');
+    Route::patch("/products/{product}", [ProductController::class, 'update'])->middleware([Is_Admin::class])->name('product.update');
+    Route::delete("/products/{product}", [ProductController::class, 'destroy'])->middleware([Is_Admin::class])->name('product.destroy');
 });
 
 Route::middleware('auth')->group(function () {

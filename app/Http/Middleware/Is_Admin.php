@@ -15,7 +15,8 @@ class Is_Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role !== 'admin') {
+        $user = auth()->user();
+        if ($user->role !== 'admin') {
             return response()->json(['message' => 'You are not authorized to access this route'], 401);
         }
         return $next($request);
