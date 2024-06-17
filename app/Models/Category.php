@@ -14,9 +14,9 @@ class Category extends Model
         'color'
     ];
 
-    public function groups()
+    public function group()
     {
-        return $this->belongsTo(Groups::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function products()

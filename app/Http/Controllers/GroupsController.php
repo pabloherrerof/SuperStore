@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Groups;
+use App\Models\Group;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class GroupsController extends Controller
 {
@@ -12,7 +13,11 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        return Groups::all();
+        $groups =  Group::with('categories')->get();
+
+        return Inertia::render('Categories', [
+            'groups' => $groups,
+        ]);
     }
 
     /**
@@ -34,7 +39,7 @@ class GroupsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Groups $groups)
+    public function show(Group $groups)
     {
         //
     }
@@ -42,7 +47,7 @@ class GroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Groups $groups)
+    public function edit(Group $groups)
     {
         //
     }
@@ -50,7 +55,7 @@ class GroupsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Groups $groups)
+    public function update(Request $request, Group $groups)
     {
         //
     }
@@ -58,7 +63,7 @@ class GroupsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Groups $groups)
+    public function destroy(Group $groups)
     {
         //
     }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Group;
 use App\Models\Groups;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,7 +28,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category => $details) {
-            $group = Groups::where('name', $details['group'])->first();
+            $group = Group::where('name', $details['group'])->first();
             Category::create([
                 'name' => $category,
                 'color' => $details['color'],

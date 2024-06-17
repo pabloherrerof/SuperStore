@@ -5,6 +5,7 @@ import { Head } from '@inertiajs/react';
 
 
 export default function Dashboard({ auth, products }) {
+    console.log(products)
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -16,12 +17,16 @@ export default function Dashboard({ auth, products }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center gap-4 flex-wrap">
             
                     { products.length > 0 ? products.map((product) => (
-                        <div className="bg-white  shadow-sm rounded-lg w-72 h-96 pt-12">
+                        <div className="bg-white  shadow-sm rounded-lg w-72 h-96 pt-12" key={product.id}>
                         <div className="w-full h-40 rounded-t-lg bg-contain bg-no-repeat bg-center mt-3" style={{backgroundImage: `url(${product.image})`}}></div>
                        <div className='flex flex-col items-center px-2 py-4 '>
                        <h2 className="text-center text-lg font-bold">{product.name}</h2>
-                        <div className="flex justify-between items-center">
-                            Categories
+                        <div className="flex gap-2 items-center flex-wrap">
+                            {
+                                product.category.map((category) => (
+                                    <span className="bg-gray-200 px-2 py-1 rounded-full text-sm text-white" style={{background: category.color}}>{category.name}</span>
+                                ))
+                            }
                         </div>
                         <h4 className="text-center">{product.price}</h4>
                        </div>

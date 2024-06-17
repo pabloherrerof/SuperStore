@@ -21,7 +21,7 @@ class GroupsSeeder extends Seeder
         ];
 
         foreach ($groups as $group) {
-            \App\Models\Groups::create([
+            \App\Models\Group::create([
                 'name' => $group,
             ]);
         }

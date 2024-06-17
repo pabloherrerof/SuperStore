@@ -1,17 +1,22 @@
 import DangerButton from "@/Components/DangerButton";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 
 export default function Dashboard({ auth, clients }) {
+    const handleDelete = (clientId) => {
+        if (confirm("Are you sure you want to delete this client?")) {
+            router.delete("/clients/" + clientId);
+        }
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-white leading-tight">
-                    Users
+                    Clients
                 </h2>
-            }
+            }x
         >
             <Head title="Products" />
 
@@ -19,7 +24,7 @@ export default function Dashboard({ auth, clients }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center gap-4 flex-wrap">
                     {clients.length > 0 ? (
                         clients.map((client) => (
-                            <div className="bg-white  shadow-sm rounded-lg w-72 h-96 pt-12">
+                            <div className="bg-white  shadow-sm rounded-lg w-72 h-96 pt-12" key={client.id}>
                                 <div
                                     className="w-full h-40 rounded-t-lg bg-contain bg-no-repeat bg-center mt-3"
                                     style={{
@@ -31,7 +36,7 @@ export default function Dashboard({ auth, clients }) {
                                         {client.user.name}
                                     </h2>
                                     <h4 className="text-center">
-                                        {client.user.role}
+                                        {client.address}
                                     </h4>
                                     <h4 className="text-center">
                                         {client.user.email}
@@ -45,7 +50,8 @@ export default function Dashboard({ auth, clients }) {
                                     <PrimaryButton className="w-34">
                                         Edit
                                     </PrimaryButton>
-                                    <DangerButton className="w-34">
+                                    <DangerButton className="w-34"
+                                     onClick={() => handleDelete(client.id)}>
                                         Remove
                                     </DangerButton>
                                 </div>
