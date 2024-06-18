@@ -20,12 +20,6 @@ class ClientSeeder extends Seeder
 
       $clients = [
         [
-          'phone' => '123456789',
-          'address' => '1234 Main St',
-          'image' => 'https://via.placeholder.com/150',
-          'user_id' => $user[1]['id'],
-        ],
-        [
           'phone' => '987654321',
           'address' => '4321 Main St',
           'image' => 'https://via.placeholder.com/150',
