@@ -51,6 +51,10 @@ NPM run build
   ./vendor/bin/sail npm run build
 ```
 
+Access 
+```bash
+ [http](http://localhost)
+```
 
 ## Authentication Info
 
