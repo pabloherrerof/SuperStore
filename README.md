@@ -1,4 +1,4 @@
-
+ 
 # SuperStore
 
 Proyecto elaborado con Laravel, React, Inertia y MySQL para la gestión de productos, clientes y categorias. Tiene un servicio API REST para el consumo de los productos asociados para cada cliente.
@@ -39,6 +39,11 @@ Run migrations
 Run database seeders
 ```bash
   ./vendor/bin/sail php artisan db:seed
+```
+
+NPM dependencies install
+```bash
+  ./vendor/bin/sail npm install
 ```
 
 NPM run build
