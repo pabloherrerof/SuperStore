@@ -20,6 +20,12 @@ Go to the project directory
   cd SuperStore
 ```
 
+Composer dependencies install
+
+```bash
+  composer install
+```
+
 Run docker
 ```bash
   ./vendor/bin/sail up
@@ -30,12 +36,15 @@ Run migrations
   ./vendor/bin/sail php artisan migrate
 ```
 
-
 Run database seeders
 ```bash
   ./vendor/bin/sail php artisan db:seed
 ```
 
+NPM run build
+```bash
+  ./vendor/bin/sail npm run build
+```
 
 
 ## Authentication Info
