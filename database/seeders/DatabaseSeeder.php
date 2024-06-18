@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-    /*      User::create([
+         User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.admin',
             'password' => Hash::make('admin'),
             'role' => 'admin',
         ]);
-          */
+          
 
           User::create([
             'name' => 'User',
@@ -37,15 +37,15 @@ class DatabaseSeeder extends Seeder
             'phone' => '123456789',
             'address' => '1234 Main St',
             'image' => 'https://via.placeholder.com/150',
-            'user_id' => 12,
+            'user_id' => 2,
         ]);
 
-/*     User::factory(5)->create(); */
+    User::factory(5)->create(); 
         $this->call([
-/*             GroupsSeeder::class,
+           GroupsSeeder::class,
             CategorySeeder::class,
             ClientSeeder::class, 
-            ProductSeeder::class*/
+            ProductSeeder::class
         ]);
     }
 }
