@@ -21,11 +21,11 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 
     public function clients()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(Client::class, 'client_category');
     }
 }

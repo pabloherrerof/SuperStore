@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApiClientController;
 use App\Http\Controllers\API\ApiProductController;
+use App\Http\Controllers\API\ApiCategoryController;
 use App\Http\Middleware\Is_Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,10 +30,12 @@ Route::post('/login', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/products', [ApiProductController::class, 'index']);
+    Route::get('/products/{product}', [ApiProductController::class, 'show']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/clients', [ApiClientController::class, 'index']);
+    Route::get('/categories', [ApiCategoryController::class, 'index']);
+    Route::get('/categories/{category}', [ApiCategoryController::class, 'show']);
 });
 
 Route::fallback(function(){

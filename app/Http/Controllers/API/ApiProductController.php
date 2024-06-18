@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,26 @@ class ApiProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        $user = auth()->user();
+
+        if ($user->role == 'admin') {
+            $products = Product::all();
+            return response()->json($products);
+        } else {
+            $client = Client::with('categories')->where('user_id', $user->id)->first();
+
+            if (!$client) {
+                return response()->json(['error' => 'Client not found'], 404);
+            }
+
+            $categoryIds = $client->categories->pluck('id');
+
+            $products = Product::whereHas('category', function ($query) use ($categoryIds) {
+                $query->whereIn('categories.id', $categoryIds);
+            })->get();
+
+            return response()->json($products);
+        }
     }
 
     /**
@@ -37,7 +57,24 @@ class ApiProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $user = auth()->user();
+
+        if ($user->role == 'admin') {
+            return $product;
+        } else {
+            $client = Client::with('categories')->where('user_id', $user->id)->first();
+            $product = Product::with('category')->where('id', $product->id)->first();
+
+            foreach ($client->categories as $category) {
+                foreach ($product->category as $productCategory) {
+                    if ($category->id == $productCategory->id) {
+                        return $product;
+                    }
+                }
+            }
+
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 
     /**

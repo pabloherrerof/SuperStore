@@ -11,13 +11,13 @@ class Client extends Model
 
     protected $fillable = [
         'phone',
-        'company',
+        'address',
         'image',
     ];
 
     public function categories()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class, 'client_category');
     }
 
     public function user()

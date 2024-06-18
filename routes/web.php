@@ -29,38 +29,31 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get("/products/create", [ProductController::class, 'create'])->middleware([Is_Admin::class])->name('products.create');
-    Route::post("/products", [ProductController::class, 'store'])->middleware([Is_Admin::class])->name('product.store');
-    Route::get("/products/{product}/edit", [ProductController::class, 'edit'])->middleware([Is_Admin::class])->name('product.edit');
-    Route::patch("/products/{product}", [ProductController::class, 'update'])->middleware([Is_Admin::class])->name('product.update');
-    Route::delete("/products/{product}", [ProductController::class, 'destroy'])->middleware([Is_Admin::class])->name('product.destroy');
+    Route::post("/products", [ProductController::class, 'store'])->middleware([Is_Admin::class])->name('products.store');
+    Route::get("/products/{product}/edit", [ProductController::class, 'edit'])->middleware([Is_Admin::class])->name('products.edit');
+    Route::put("/products/{product}", [ProductController::class, 'update'])->middleware([Is_Admin::class])->name('products.update');
+    Route::delete("/products/{product}", [ProductController::class, 'destroy'])->middleware([Is_Admin::class])->name('products.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/clients', [ClientController::class, 'index'])->middleware([Is_Admin::class])->name('clients.index');
-    Route::get("/clients/create", [ClientController::class, 'create'])->middleware([Is_Admin::class])->name('products.create');
-    Route::post("/clients", [ClientController::class, 'store'])->middleware([Is_Admin::class])->name('product.store');
-    Route::get("/clients/{product}/edit", [ClientController::class, 'edit'])->middleware([Is_Admin::class])->name('product.edit');
-    Route::patch("/clients/{product}", [ClientController::class, 'update'])->middleware([Is_Admin::class])->name('product.update');
-    Route::delete("/clients/{product}", [ClientController::class, 'destroy'])->middleware([Is_Admin::class])->name('product.destroy');
+    Route::get('/clients/create', [ClientController::class, 'create'])->middleware([Is_Admin::class])->name('clients.create');
+    Route::post('/clients', [ClientController::class, 'store'])->middleware([Is_Admin::class])->name('clients.store');
+    Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->middleware([Is_Admin::class])->name('clients.edit');
+    Route::put('/clients/{client}', [ClientController::class, 'update'])->middleware([Is_Admin::class])->name('clients.update');
+    Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->middleware([Is_Admin::class])->name('clients.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/categories', [GroupsController::class, 'index'])->middleware([Is_Admin::class])->name('category.index');
-    Route::get("/categories/create", [CategoryController::class, 'create'])->middleware([Is_Admin::class])->name('category.create');
-    Route::post("/categories", [CategoryController::class, 'store'])->middleware([Is_Admin::class])->name('category.store');
-    Route::get("/categories/{product}/edit", [CategoryController::class, 'edit'])->middleware([Is_Admin::class])->name('category.edit');
-    Route::patch("/categories/{product}", [CategoryController::class, 'update'])->middleware([Is_Admin::class])->name('category.update');
-    Route::delete("/categories/{product}", [CategoryController::class, 'destroy'])->middleware([Is_Admin::class])->name('category.destroy');
+    Route::get('/categories', [GroupsController::class, 'index'])->name('categories.index');
+    Route::get("/categories/create", [CategoryController::class, 'create'])->middleware([Is_Admin::class])->name('categories.create');
+    Route::post("/categories", [CategoryController::class, 'store'])->middleware([Is_Admin::class])->name('categories.store');
+    Route::get("/categories/{category}/edit", [CategoryController::class, 'edit'])->middleware([Is_Admin::class])->name('categories.edit');
+    Route::put("/categories/{category}", [CategoryController::class, 'update'])->middleware([Is_Admin::class])->name('categories.update');
+    Route::delete("/categories/{category}", [CategoryController::class, 'destroy'])->middleware([Is_Admin::class])->name('categories.destroy');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/clients', [ClientController::class, 'index'])->middleware([Is_Admin::class])->name('client.index');
-    Route::get("/clients/create", [ClientController::class, 'create'])->middleware([Is_Admin::class])->name('client.create');
-    Route::post("/clients", [ClientController::class, 'store'])->middleware([Is_Admin::class])->name('client.store');
-    Route::get("/clients/{product}/edit", [ClientController::class, 'edit'])->middleware([Is_Admin::class])->name('client.edit');
-    Route::patch("/clients/{product}", [ClientController::class, 'update'])->middleware([Is_Admin::class])->name('client.update');
-    Route::delete("/clients/{id}", [ClientController::class, 'destroy'])->middleware([Is_Admin::class])->name('client.destroy');
-});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

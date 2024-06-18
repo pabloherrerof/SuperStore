@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Client;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,19 +15,20 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('group')->get();
-
-        return Inertia::render('Categories', [
-            'categories' => $categories,
-        ]);
+       
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        
+        $groups = Group::all();
+        return Inertia::render(
+            'Categories/CreateCategory',
+            ['groups' => $groups]
+        );
     }
 
     /**
@@ -33,7 +36,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'color' => 'required|string|max:255',
+            'group_id' => 'required|exists:groups,id',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->color = $request->color;
+        $category->group_id = $request->group_id;
+
+        $category->save();
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -49,7 +65,12 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $category->load('group');
+        $groups = Group::all();
+        return Inertia::render(
+            'Categories/EditCategory',
+            ['category' => $category, 'groups' => $groups]
+        );
     }
 
     /**
@@ -57,7 +78,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'color' => 'required|string|max:255',
+            'group_id' => 'required|exists:groups,id',
+        ]);
+
+        $category->name = $request->name;
+        $category->color = $request->color;
+        $category->group_id = $request->group_id;
+
+        $category->save();
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -65,6 +98,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('categories.index');
     }
 }

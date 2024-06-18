@@ -15,19 +15,11 @@ class CategoriesClientsSeeder extends Seeder
      */
     public function run(): void
     {
-        $clientIds = Client::pluck('id')->toArray();
-        $categoryIds = Category::pluck('id')->toArray();
+        $clients = Client::all();
+        $categories = Category::all();
 
-        if(empty($clientIds) && empty($categoryIds)) {
-            echo "No clients or categories found";
-        } else {
-            foreach ($clientIds as $client) {
-                DB::table('categories_clients')->insert([
-                    'client_id' => $client,
-                    'category_id' => $categoryIds[array_rand($categoryIds)],
-                ]); 
-            }   
-                  
+        foreach ($clients as $client) {
+            $client->categories()->attach($categories->random(rand(1, 3))->pluck('id'));
         }
     }
 }
