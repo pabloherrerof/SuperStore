@@ -111,7 +111,7 @@ export default function Categories({ auth, groups }) {
                             </div>
                         ))
                     ) : (
-                        <h2 className="text-center text-2xl">
+                        <h2 className="text-center text-2xl text-white">
                             No categories found
                         </h2>
                     )}

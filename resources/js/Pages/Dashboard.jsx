@@ -53,7 +53,7 @@ export default function Dashboard({ auth, products }) {
                             </div>}
                         </div>
                     )) : 
-                    <h2 className="text-center text-2xl">No products found</h2>}
+                    <h2 className="text-center text-2xl text-white">No products found</h2>}
                 </div>
             </div>
         </AuthenticatedLayout>

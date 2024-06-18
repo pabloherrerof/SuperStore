@@ -103,7 +103,7 @@ export default function Dashboard({ auth, clients }) {
                             </div>
                         ))
                     ) : (
-                        <h2 className="text-center text-2xl">
+                        <h2 className="text-center text-2xl text-white">
                             No clients found
                         </h2>
                     )}

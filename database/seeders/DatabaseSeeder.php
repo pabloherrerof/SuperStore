@@ -45,7 +45,8 @@ class DatabaseSeeder extends Seeder
            GroupsSeeder::class,
             CategorySeeder::class,
             ClientSeeder::class, 
-            ProductSeeder::class
+            ProductSeeder::class,
+            CategoriesClientsSeeder::class,
         ]);
     }
 }
