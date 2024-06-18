@@ -52,9 +52,8 @@ NPM run build
 ```
 
 Access 
-```bash
  [http](http://localhost)
-```
+
 
 ## Authentication Info
 
