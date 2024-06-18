@@ -52,7 +52,7 @@ NPM run build
 ```
 
 Access 
- [http](http://localhost)
+ [http://localhost](http://localhost)
 
 
 ## Authentication Info
