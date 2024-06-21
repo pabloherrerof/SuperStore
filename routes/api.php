@@ -38,10 +38,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories/{category}', [ApiCategoryController::class, 'show']);
 });
 
-Route::group(function () {
+
     Route::get('/clients', [ApiClientController::class, 'index']);
     Route::get('/clients/{client}', [ApiClientController::class, 'show']);
-});
+
 
 Route::fallback(function(){
     return response()->json([
