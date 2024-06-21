@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories/{category}', [ApiCategoryController::class, 'show']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::group(function () {
     Route::get('/clients', [ApiClientController::class, 'index']);
     Route::get('/clients/{client}', [ApiClientController::class, 'show']);
 });
